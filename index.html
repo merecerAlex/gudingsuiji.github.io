@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+   <title>一个页面</title>
+    <style>
+     body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .url {
+            color: #666;
+            margin: 10px 0;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .copy-btn {
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1 1 40%;
+        }
+        .copy-btn:hover {
+            background: #45a049;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+        }
+        .social-link {
+            color: #2196F3;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 保持原有HTML结构不变 -->
+    <div class="header">
+        <h2>这是大学生做的测试网页！</h2>
+        <div class="url">6zqp56mtkyymlba.dianyitong.net</div>
+    </div>
+
+    <p>这一页测试使用execCommand方法复制文字。</p>
+
+    <div class="button-group">
+        <button class="copy-btn" data-text="要了解的🌏找duocai_facai，备注小红薯">1</button>
+        <button class="copy-btn" data-text="要了解的🌏找duocai_facai，备注小红薯">2</button>
+        <button class="copy-btn" data-text="要了解的🌏找duocai_facai，备注小红薯">3</button>
+        <button class="copy-btn" data-text="要了解的🌏找duocai_facai，备注小红薯">4</button>
+        <button class="copy-btn" id="random-btn">复制文案</button>
+    </div>
+
+    <div class="footer">
+        <p>队长<br>河南 郑州</p>
+        <a href="#" class="social-link">我的微博</a>
+        <a href="#" class="social-link">保存整页为图片 ></a>
+    </div>
+
+    <script>
+        // 添加文本库
+        const textLibrary = [
+            "郑州金水区快餐店需要打包员饮料免费喝130-150/天下班就给",
+            "急招小时工工作时间灵活时薪20-25元联系电话：123-456789",
+            "周末兼职促销员日薪150元+提成要求：沟通能力强",
+            "长期招聘配送员月薪5000-8000元提供电动车包住宿",
+            "寒假实习岗位专业不限提供实习证明表现优异可转正"
+        ];
+
+        document.querySelectorAll('.copy-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                let text;
+                
+                // 判断是否是第五个按钮（索引4）
+                if(index === 4) {
+                    // 从文本库随机选择
+                    text = textLibrary[Math.floor(Math.random() * textLibrary.length)];
+                } else {
+                    // 其他按钮保持原有逻辑
+                    text = this.dataset.text;
+                }
+
+                // 保持原有复制逻辑
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                alert('已复制: ' + text);
+            });
+        });
+    </script>
+</body>
+</html>
